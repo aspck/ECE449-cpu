@@ -42,7 +42,7 @@ port(
     --write signals
     result: out std_logic_vector(15 downto 0); 
     z_flag: out std_logic;
-    n_flag: out std_logic;
+    n_flag: out std_logic
 );
 end ALU;
 
@@ -82,14 +82,14 @@ begin
       -- translation of Table I opcode 5:
       if (n != '0') then
         -- set RA equal to (the first 15-n bits of operand 1) concatenated with n zeroes
-        result <= in1(15-n downto 0) 
+        result <= ( in1((15 - to_integer(unsigned(n))) downto 0) , others => '0' );
       
       
       -- Shift right
       when "110" => result <= shift_left(in1, in2);
       
       -- TEST
-      when "111" => if ( 
+      when "111" => if ('1') 
       end if; 
       
       when others => NULL; end case;
